@@ -1,3 +1,5 @@
+#File containing function that was run in the background processes of server
+
 from shared_files.db import *
 import time
 from sqlalchemy import func
@@ -20,7 +22,7 @@ lastCorrespondenceCutoff = 31540000
 def analyze_frequencies():
 	print(str(time.time()) + ' - Starting strength determiner')
 	
-	#Sort 20 contacts with longest time since last check
+	#Sort 20 contacts with longest time since last relationship strength guess
 	contactList = contact.query.options(joinedload(contact.contact_user,user.emails)).options(joinedload(contact.jobs)).order_by(contact.relationship_strength_time).limit(20)
 	
 	for eachContact in contactList:
